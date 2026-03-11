@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Midpoint Organic Transplants — For the Farmers That Grow For You</title>
 <meta name="description" content="Certified organic vegetable transplants grown for small farms, delivered at cost across California's tri-county region.">
+<meta name="theme-color" content="#2d2d2a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -26,10 +27,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body { font-family: 'Montserrat', sans-serif; background: var(--cream); overflow-x: hidden; color: var(--dark); }
+body.menu-open { overflow: hidden; }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { -moz-appearance: textfield; }
 img { display: block; width: 100%; height: auto; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+::selection { background: var(--orange); color: #fff; }
+::-moz-selection { background: var(--orange); color: #fff; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .fade-in { opacity: 1; transform: none; }
+}
 
 /* Animations */
 @keyframes fadeUp {
@@ -49,10 +59,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 /* LAYOUT */
 .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
 
-/* NAV */
+/* NAV — always cream background for editorial inset hero */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 24px 0; transition: all 0.4s ease;
+  padding: 14px 0; transition: all 0.4s ease;
+  background: var(--cream);
 }
 .nav.scrolled {
   background: rgba(245,240,234,0.97); backdrop-filter: blur(12px);
@@ -64,37 +75,31 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .nav-logo {
   font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800;
-  letter-spacing: 0.08em; text-transform: uppercase; color: #fff;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--black);
   text-decoration: none; transition: color 0.4s; cursor: pointer;
 }
-.nav.scrolled .nav-logo { color: var(--black); }
 .nav-links { display: flex; gap: 36px; align-items: center; }
 .nav-links a {
   font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: #fff; text-decoration: none; padding: 4px 0;
+  color: var(--dark); text-decoration: none; padding: 4px 0;
   border-bottom: 1.5px solid transparent; transition: all 0.3s;
 }
-.nav-links a:hover, .nav-links a:focus-visible { border-bottom-color: #fff; }
-.nav.scrolled .nav-links a { color: var(--dark); }
-.nav.scrolled .nav-links a:hover { border-bottom-color: var(--dark); }
+.nav-links a:hover, .nav-links a:focus-visible { border-bottom-color: var(--dark); }
+.nav-links a.active { border-bottom-color: var(--dark); }
 .nav-links .nav-cta {
-  background: none; border: 1.5px solid rgba(255,255,255,0.8);
-  padding: 8px 20px; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: #fff;
+  background: none; border: 1.5px solid var(--dark);
+  padding: 10px 20px; font-size: 11px; font-weight: 700; min-height: 44px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--dark);
   text-decoration: none; transition: all 0.3s; cursor: pointer;
+  display: inline-flex; align-items: center;
 }
-.nav-links .nav-cta:hover { background: #fff; color: var(--dark); border-color: #fff; }
-.nav.scrolled .nav-links .nav-cta {
-  border-color: var(--dark); color: var(--dark);
-}
-.nav.scrolled .nav-links .nav-cta:hover { background: var(--dark); color: #fff; }
+.nav-links .nav-cta:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
 
 .nav-burger {
   display: none; background: none; border: none; cursor: pointer; padding: 8px;
   flex-direction: column; gap: 5px;
 }
-.nav-burger span { display: block; width: 22px; height: 2px; background: #fff; transition: all 0.3s; }
-.nav.scrolled .nav-burger span { background: var(--dark); }
+.nav-burger span { display: block; width: 22px; height: 2px; background: var(--dark); transition: all 0.3s; }
 .nav-mobile {
   display: none; position: absolute; top: 100%; left: 0; right: 0;
   background: var(--cream); padding: 20px 40px; border-bottom: 1px solid var(--tan);
@@ -106,31 +111,26 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   color: var(--dark); text-decoration: none; padding: 4px 0;
 }
 
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-burger { display: flex; }
-  .container { padding: 0 20px; }
-  .nav-inner { padding: 0 20px; }
-  .nav-mobile { padding: 20px; }
-}
-
-/* HERO — full bleed image */
+/* HERO — editorial inset image with rounded corners */
 .hero {
-  position: relative; min-height: 100vh;
+  position: relative; min-height: calc(100vh - 40px); min-height: calc(100svh - 40px);
   display: flex; align-items: flex-end;
   overflow: hidden;
+  margin: 20px 40px 0; border-radius: 12px;
 }
 .hero-img {
   position: absolute; inset: 0;
   background: url('https://images.pexels.com/photos/736779/pexels-photo-736779.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+  border-radius: 12px;
 }
 .hero-img::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.3) 100%);
+  border-radius: 12px;
 }
 .hero-content {
   position: relative; z-index: 2; width: 100%;
-  padding: 0 40px 80px; max-width: 1280px; margin: 0 auto;
+  padding: 100px 40px 80px; max-width: 1280px; margin: 0 auto;
 }
 .hero-region {
   font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
@@ -154,21 +154,23 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .btn-primary {
   font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.2;
   background: #fff; color: var(--dark); border: none;
   padding: 16px 36px; cursor: pointer;
-  transition: all 0.3s; text-decoration: none;
+  transition: all 0.3s; text-decoration: none; display: inline-block;
 }
 .btn-primary:hover { background: var(--orange); color: #fff; }
+.btn-primary:active { transform: scale(0.97); }
 .btn-secondary {
   font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.2;
   background: transparent; color: #fff;
   border: 1.5px solid rgba(255,255,255,0.4);
   padding: 16px 36px; cursor: pointer;
-  transition: all 0.3s; text-decoration: none;
+  transition: all 0.3s; text-decoration: none; display: inline-block;
 }
 .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+.btn-secondary:active { transform: scale(0.97); }
 
 /* SECTION SHARED */
 .section-label {
@@ -220,12 +222,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .serve-card:hover p { max-height: 100px; opacity: 1; }
 
-@media (max-width: 768px) {
-  .serve-grid { grid-template-columns: 1fr; }
-  .serve-card p { max-height: 100px; opacity: 1; }
-  .serve-card { aspect-ratio: 16/10; }
-}
-
 /* PRICING */
 .pricing { padding: 120px 0; background: var(--warm-white); }
 .pricing-header { margin-bottom: 64px; }
@@ -240,7 +236,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .pricing-card {
   padding: 40px 36px; border: 1px solid var(--tan); background: #fff;
+  border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
 .pricing-card.featured { border: 2px solid var(--dark); }
 .pricing-card .tag {
   font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -259,10 +257,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .price-row .amount { font-size: 22px; font-weight: 800; color: var(--dark); }
 .price-row .amount.muted { font-size: 12px; font-weight: 600; color: var(--green-light); letter-spacing: 0.05em; text-transform: uppercase; }
 .pricing-card .note { font-size: 13px; color: #999; margin-top: 24px; line-height: 1.6; }
-
-@media (max-width: 768px) {
-  .pricing-grid { grid-template-columns: 1fr; }
-}
 
 /* EDITORIAL IMAGE SECTION — inset with rounded corners */
 .full-image {
@@ -290,13 +284,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 
 /* DELIVERY */
 .delivery { padding: 120px 0; background: var(--dark); }
-.delivery-inner { }
 .delivery .section-label { color: var(--orange); }
 .delivery .section-heading { color: #fff; }
 .delivery-sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 48px; }
 .delivery-box {
   background: rgba(255,255,255,0.04); padding: 40px 36px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
 }
 .delivery-inputs {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -308,7 +301,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   margin-bottom: 8px; font-weight: 600;
 }
 .delivery-inputs input {
-  width: 100%; padding: 14px 16px;
+  width: 100%; padding: 14px 16px; border-radius: 4px;
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
   color: #fff; font-family: 'Montserrat', sans-serif; font-size: 15px;
@@ -317,10 +310,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .delivery-inputs input:focus { border-color: rgba(255,255,255,0.3); }
 .unload-btns { display: flex; gap: 8px; }
 .unload-btn {
-  flex: 1; padding: 12px 12px; border: 1px solid rgba(255,255,255,0.1);
+  flex: 1; padding: 14px 12px; min-height: 44px; border: 1px solid rgba(255,255,255,0.1);
   font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
   letter-spacing: 0.05em; cursor: pointer; background: transparent;
   color: rgba(255,255,255,0.4); transition: all 0.2s; text-transform: uppercase;
+  border-radius: 4px;
 }
 .unload-btn:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); }
 .unload-btn.active { background: #fff; color: var(--dark); border-color: #fff; }
@@ -344,14 +338,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .cost-total-amount { font-size: 36px; font-weight: 900; color: #fff; }
 .cost-per-tray { font-size: 12px; color: rgba(255,255,255,0.3); text-align: right; margin-top: 4px; }
 .bundle-notice {
-  margin-top: 24px; padding: 16px 20px;
+  margin-top: 24px; padding: 16px 20px; border-radius: 6px;
   background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
   display: none;
 }
 .bundle-notice.show { display: block; }
 .bundle-notice p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
 .distance-warning {
-  margin-top: 16px; padding: 16px 20px;
+  margin-top: 16px; padding: 16px 20px; border-radius: 6px;
   background: rgba(220,53,69,0.08); border: 1px solid rgba(220,53,69,0.2);
   display: none; font-size: 13px; color: #f5a0a0; line-height: 1.6;
 }
@@ -390,8 +384,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .impact-grid p {
   font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; margin: 0;
 }
-@media (max-width: 768px) { .impact-grid { grid-template-columns: 1fr; } }
-
 /* FOUNDERS */
 .founders { padding: 120px 0; background: var(--cream); }
 .founders-header { margin-bottom: 40px; }
@@ -406,7 +398,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .founder-card {
   padding: 40px 32px; border: 1px solid var(--tan); background: #fff;
+  border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.founder-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
 .founder-avatar {
   width: 56px; height: 56px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -426,14 +420,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   padding-left: 16px; border-left: 2px solid var(--tan);
 }
 
-@media (max-width: 768px) { .founders-grid { grid-template-columns: 1fr; } }
-
 /* VALUE PROPS — Natoora three-column pattern */
 .value-props { padding: 100px 0; background: var(--cream); }
 .value-props-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
 }
-.value-prop {}
 .value-prop-icon {
   font-size: 32px; margin-bottom: 20px; display: block;
 }
@@ -450,9 +441,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   text-underline-offset: 3px; transition: color 0.3s;
 }
 .value-prop a:hover { color: var(--orange); }
-@media (max-width: 768px) {
-  .value-props-grid { grid-template-columns: 1fr; gap: 40px; }
-}
 
 /* FOOTER CTA — inset editorial image */
 .footer-cta {
@@ -489,7 +477,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 64px; margin-bottom: 64px;
 }
-.footer-left {}
 .footer-headline {
   font-size: clamp(28px, 4vw, 42px); font-weight: 900;
   text-transform: uppercase; color: #fff; line-height: 1.05;
@@ -504,7 +491,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .footer-social a:hover { color: #fff; }
 .footer-right { display: flex; gap: 64px; }
-.footer-col {}
 .footer-col-title {
   font-size: 13px; font-weight: 800; letter-spacing: 0.05em;
   text-transform: uppercase; color: #fff; margin: 0 0 20px;
@@ -514,7 +500,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .footer-col a, .footer-col p {
   display: block; font-size: 14px; color: rgba(255,255,255,0.5);
   text-decoration: none; margin: 0 0 12px; transition: color 0.3s;
-  line-height: 1.4;
+  line-height: 1.4; overflow-wrap: break-word; word-break: break-word;
 }
 .footer-col a:hover { color: #fff; }
 .footer-bottom {
@@ -523,30 +509,77 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.2); margin: 0; }
 
-@media (max-width: 768px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 48px; }
-  .footer-right { flex-direction: column; gap: 32px; }
-  .full-image { margin: 0 20px; }
-  .footer-cta { margin: 0 20px; }
-}
-
 /* STICKY MOBILE CTA */
 .sticky-cta {
   display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
   padding: 12px 20px; background: rgba(245,240,234,0.97);
   backdrop-filter: blur(12px); border-top: 1px solid var(--tan);
   justify-content: center; align-items: center; gap: 12px;
+  transition: transform 0.3s ease;
 }
+.sticky-cta.hidden { transform: translateY(100%); }
 .sticky-cta-text { font-size: 13px; color: var(--dark); font-weight: 600; }
 .sticky-cta .btn-primary { padding: 12px 24px; font-size: 10px; }
 
+/* TABLET (769–1024px) */
+@media (max-width: 1024px) {
+  .container { padding: 0 32px; }
+  .nav-inner { padding: 0 32px; }
+  .hero { margin: 16px 32px 0; }
+  .footer-right { gap: 40px; }
+  .impact-grid { gap: 24px; }
+  .value-props-grid { gap: 32px; }
+}
+
+/* MOBILE (≤768px) — consolidated */
 @media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-mobile { padding: 20px; }
+
+  .hero { margin: 12px 16px 0; min-height: calc(100vh - 24px); min-height: calc(100svh - 24px); }
   .hero h1 { font-size: clamp(32px, 10vw, 52px); }
-  .hero-content { padding: 0 20px 60px; }
-  .full-image { margin: 0 20px; }
+  .hero-content { padding: 80px 20px 60px; }
+  .hero-btns { gap: 12px; }
+  .btn-primary { padding: 14px 28px; }
+  .btn-secondary { padding: 14px 28px; }
+
+  .serve { padding: 80px 0; }
+  .serve-grid { grid-template-columns: 1fr; }
+  .serve-card p { max-height: 100px; opacity: 1; }
+  .serve-card { aspect-ratio: 16/10; }
+
+  .pricing { padding: 80px 0; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-card { padding: 32px 24px; }
+
+  .delivery { padding: 80px 0; }
+  .delivery-box { padding: 28px 20px; }
+
+  .trusted-farms { gap: 8px 24px; }
+
+  .full-image { margin: 0 20px; min-height: 50vh; }
   .full-image-content { padding: 60px 20px; }
-  .footer-cta { margin: 0 20px; }
+  .impact-grid { grid-template-columns: 1fr; }
+
+  .founders { padding: 80px 0; }
+  .founders-grid { grid-template-columns: 1fr; }
+  .founder-card { padding: 32px 24px; }
+
+  .value-props { padding: 60px 0; }
+  .value-props-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .footer-cta { margin: 0 20px; min-height: 40vh; }
   .footer-cta-content { padding: 60px 20px; }
+
+  .footer { margin-top: 60px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-right { flex-direction: column; gap: 32px; }
+
+  .cost-total-amount { font-size: 28px; }
+  .sticky-cta .btn-primary { padding: 12px 20px; }
 }
 </style>
 </head>
@@ -580,7 +613,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <section class="hero">
   <div class="hero-img"></div>
   <div class="hero-content">
-    <div class="hero-region" style="opacity:0;animation:fadeUp 0.8s ease 0.2s forwards;">Santa Barbara &middot; Ventura &middot; San Luis Obispo</div>
+    <div class="hero-region">Santa Barbara &middot; Ventura &middot; San Luis Obispo</div>
     <h1>For the<br>farmers<br>that grow<br>for you</h1>
     <p class="hero-sub">Certified organic vegetable transplants grown for small farms, delivered at cost across California's tri-county region.</p>
     <div class="hero-btns">
@@ -663,7 +696,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   <div class="container">
     <div class="delivery-inner fade-in">
       <div class="section-label">Delivery Calculator</div>
-      <h2 class="section-heading" style="color:#fff;">Calculate Your<br>Delivery Cost</h2>
+      <h2 class="section-heading">Calculate Your<br>Delivery Cost</h2>
       <p class="delivery-sub">We deliver at cost within 100 miles, six days a week.</p>
     </div>
     <div class="delivery-box fade-in d1">
@@ -723,8 +756,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   <div class="full-image-bg" style="background-image:url('https://images.pexels.com/photos/7658812/pexels-photo-7658812.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
   <div class="full-image-content">
     <div class="fade-in">
-      <div class="section-label" style="color:var(--orange);">Community Impact</div>
-      <h2 class="section-heading" style="color:#fff;">We chose a site<br>where we could<br>cultivate more<br>than plants</h2>
+      <div class="section-label">Community Impact</div>
+      <h2 class="section-heading">We chose a site<br>where we could<br>cultivate more<br>than plants</h2>
     </div>
     <div class="impact-grid">
       <div class="fade-in d1">
@@ -853,22 +886,40 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 </div>
 
 <script>
-// NAV
+// NAV — mobile menu with body scroll lock
 let mobileOpen = false;
 function toggleMobile() {
   mobileOpen = !mobileOpen;
   document.getElementById('mobileMenu').classList.toggle('open', mobileOpen);
+  document.body.classList.toggle('menu-open', mobileOpen);
 }
 function closeMobile() {
   mobileOpen = false;
   document.getElementById('mobileMenu').classList.remove('open');
+  document.body.classList.remove('menu-open');
 }
 
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-});
+// NAV — scroll state + active section highlighting
+const navEl = document.getElementById('nav');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
 
-// INTERSECTION OBSERVER
+function updateNav() {
+  const sy = window.scrollY;
+  navEl.classList.toggle('scrolled', sy > 60);
+
+  // Active section
+  let current = '';
+  sections.forEach(s => {
+    if (sy >= s.offsetTop - 200) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+
+// INTERSECTION OBSERVER — fade-in animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -945,18 +996,26 @@ function costLine(label, amount) {
   return '<div class="cost-line"><span class="cl-label">' + label + '</span><span class="cl-amount">$' + amount.toFixed(2) + '</span></div>';
 }
 
-// STICKY CTA
+// STICKY MOBILE CTA — show after hero, hide near footer
 const stickyCta = document.getElementById('stickyCta');
 const heroEl = document.querySelector('.hero');
+const footerEl = document.querySelector('.footer');
 
-window.addEventListener('scroll', () => {
+function updateStickyCta() {
+  if (window.innerWidth > 768) { stickyCta.style.display = ''; return; }
   const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
-  if (window.scrollY > heroBottom && window.innerWidth <= 768) {
+  const footerTop = footerEl.offsetTop;
+  const viewBottom = window.scrollY + window.innerHeight;
+
+  if (window.scrollY > heroBottom) {
     stickyCta.style.display = 'flex';
+    stickyCta.classList.toggle('hidden', viewBottom > footerTop - 20);
   } else {
     stickyCta.style.display = '';
   }
-});
+}
+window.addEventListener('scroll', updateStickyCta, { passive: true });
+window.addEventListener('resize', updateStickyCta, { passive: true });
 </script>
 </body>
 </html>
