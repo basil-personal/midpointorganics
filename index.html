@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midpoint Organic Transplants — For the Farmers That Grow For You</title>
+<meta name="description" content="Certified organic vegetable transplants grown for small farms, delivered at cost across California's tri-county region.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #1a1a1a;
+  --dark: #2d2d2a;
+  --green: #3a5a40;
+  --green-light: #588157;
+  --green-pale: #a3b18a;
+  --orange: #e8751a;
+  --orange-light: #f09c4a;
+  --cream: #faf6f0;
+  --warm-white: #fefcf9;
+  --tan: #e8dfd5;
+  --soil: #5c4033;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); overflow-x: hidden; color: var(--dark); }
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in.d1 { transition-delay: 0.1s; }
+.fade-in.d2 { transition-delay: 0.2s; }
+.fade-in.d3 { transition-delay: 0.3s; }
+.fade-in.d4 { transition-delay: 0.35s; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 0;
+  transition: all 0.4s ease;
+}
+.nav.scrolled {
+  background: rgba(250,246,240,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 0;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10; cursor: pointer;
+  text-decoration: none;
+}
+.nav-logo-text {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 26px; font-weight: 400; letter-spacing: 0.04em;
+  color: #fff; transition: color 0.4s;
+}
+.nav.scrolled .nav-logo-text { color: var(--black); }
+.nav-logo-dot {
+  position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
+}
+.nav-logo-sub {
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); font-weight: 500; transition: color 0.4s; line-height: 1.2;
+}
+.nav.scrolled .nav-logo-sub { color: var(--green-light); }
+.nav-links { display: flex; gap: 32; align-items: center; }
+.nav-links a {
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+  letter-spacing: 0.02em; color: rgba(255,255,255,0.9);
+  text-decoration: none; padding: 4px 0;
+  border-bottom: 2px solid transparent; transition: all 0.3s;
+}
+.nav-links a:hover { border-bottom-color: var(--orange); }
+.nav.scrolled .nav-links a { color: var(--dark); }
+.nav-burger {
+  display: none; background: none; border: none; cursor: pointer; padding: 8px;
+  flex-direction: column; gap: 6px;
+}
+.nav-burger span {
+  display: block; width: 24px; height: 2px; background: #fff;
+  transition: all 0.3s;
+}
+.nav.scrolled .nav-burger span { background: var(--dark); }
+.nav-mobile {
+  display: none; position: absolute; top: 100%; left: 0; right: 0;
+  background: var(--cream); padding: 16px 24px;
+  border-bottom: 1px solid var(--tan);
+  flex-direction: column; gap: 12px;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
+  color: var(--dark); text-decoration: none; padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+}
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(165deg, var(--green) 0%, var(--dark) 60%, var(--soil) 100%);
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute; inset: 0; opacity: 0.06;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(232,117,26,0.2) 0%, transparent 50%);
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center;
+  padding: 0 24px; max-width: 800px;
+}
+.hero-region {
+  font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 24px; font-weight: 600;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero h1 {
+  font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+  font-size: clamp(42px, 7vw, 84px); line-height: 1.05; color: #fff;
+  margin: 0 0 24px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero h1 .accent { color: var(--orange); }
+.hero h1 em { font-style: italic; }
+.hero-sub {
+  font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.75);
+  max-width: 520px; margin: 0 auto 40px; line-height: 1.6;
+  opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+}
+.hero-btns {
+  display: flex; gap: 16; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+}
+.btn-primary {
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+  background: var(--orange); color: #fff; border: none;
+  padding: 14px 36px; border-radius: 6px; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(232,117,26,0.3);
+  text-decoration: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,117,26,0.4); }
+.btn-secondary {
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+  background: transparent; color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 14px 36px; border-radius: 6px; cursor: pointer;
+  transition: all 0.2s; text-decoration: none;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+.hero-fade {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+  background: linear-gradient(transparent, var(--cream));
+}
+
+/* SECTION HEADERS */
+.section-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(36px, 5vw, 52px); font-weight: 400;
+  margin: 0 0 16px;
+}
+.section-bar {
+  width: 60px; height: 3px; background: var(--orange);
+  margin: 0 auto; border-radius: 2px;
+}
+
+/* WE SERVE */
+.serve { padding: 100px 24px; background: var(--cream); }
+.serve-inner { max-width: 1100px; margin: 0 auto; }
+.serve-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.serve-card {
+  position: relative; border-radius: 12px; overflow: hidden;
+  padding: 48px 28px; min-height: 260px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  cursor: default; transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.serve-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+.serve-card-icon {
+  position: absolute; top: 20px; right: 20px; font-size: 36px;
+  opacity: 0.4; transition: transform 0.4s;
+}
+.serve-card:hover .serve-card-icon { transform: scale(1.2) rotate(-10deg); }
+.serve-card h3 {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 28px;
+  color: #fff; font-weight: 400; margin: 0 0 12px;
+}
+.serve-card p {
+  font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.6; margin: 0;
+  opacity: 0; max-height: 0; transition: opacity 0.4s, max-height 0.4s;
+  overflow: hidden;
+}
+.serve-card:hover p { opacity: 1; max-height: 200px; }
+
+/* PRICING */
+.pricing {
+  padding: 100px 24px;
+  background: linear-gradient(170deg, var(--warm-white) 0%, var(--tan) 100%);
+}
+.pricing-inner { max-width: 900px; margin: 0 auto; }
+.pricing-subtitle {
+  font-size: 18px; color: var(--green-light); font-weight: 600; margin: 0 0 16px;
+}
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+.pricing-card {
+  background: #fff; border-radius: 16px; padding: 40px 36px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+}
+.pricing-card.featured { border: 2px solid var(--orange); }
+.pricing-card .tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 8px;
+}
+.pricing-card h3 {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 28px;
+  color: var(--dark); font-weight: 400; margin: 0 0 28px;
+}
+.price-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.price-row .label { font-size: 16px; color: var(--dark); }
+.price-row .amount { font-size: 24px; font-weight: 700; color: var(--dark); }
+.price-row .amount.muted { font-size: 14px; font-weight: 500; color: var(--green-light); }
+.pricing-card .note { font-size: 13px; color: #999; margin-top: 24px; line-height: 1.5; }
+
+/* DELIVERY */
+.delivery { padding: 100px 24px; background: var(--dark); }
+.delivery-inner { max-width: 800px; margin: 0 auto; }
+.delivery h2 { color: #fff; }
+.delivery .section-sub {
+  font-size: 16px; color: rgba(255,255,255,0.6); margin: 0 0 16px;
+}
+.delivery-box {
+  background: rgba(255,255,255,0.05); border-radius: 16px; padding: 40px 36px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.delivery-inputs {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; margin-bottom: 28px;
+}
+.delivery-inputs label {
+  display: block; font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  margin-bottom: 8px; font-weight: 500;
+}
+.delivery-inputs input {
+  width: 100%; padding: 12px 16px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.06);
+  color: #fff; font-family: 'DM Sans', sans-serif; font-size: 16px;
+  outline: none;
+}
+.delivery-inputs input:focus { border-color: rgba(255,255,255,0.25); }
+.unload-btns { display: flex; gap: 8px; }
+.unload-btn {
+  flex: 1; padding: 10px 12px; border-radius: 8px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer;
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);
+  font-weight: 400; transition: all 0.2s;
+}
+.unload-btn.active { background: var(--orange); color: #fff; font-weight: 600; }
+.cost-breakdown {
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+  display: none;
+}
+.cost-breakdown.show { display: block; }
+.cost-line {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.cost-line .cl-label { font-size: 14px; color: rgba(255,255,255,0.5); }
+.cost-line .cl-amount { font-size: 14px; color: rgba(255,255,255,0.8); font-weight: 500; }
+.cost-total {
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; margin-top: 12px;
+}
+.cost-total-label { font-size: 18px; color: #fff; font-weight: 600; }
+.cost-total-amount { font-size: 36px; font-weight: 700; color: var(--orange); }
+.cost-per-tray { font-size: 13px; color: rgba(255,255,255,0.4); text-align: right; margin-top: 4px; }
+.bundle-notice {
+  margin-top: 24px; padding: 16px 20px; border-radius: 10px;
+  background: rgba(232,117,26,0.1); border: 1px solid rgba(232,117,26,0.2);
+  display: none;
+}
+.bundle-notice.show { display: block; }
+.bundle-notice p { font-size: 14px; color: var(--orange-light); line-height: 1.5; margin: 0; }
+
+/* TRUSTED */
+.trusted {
+  padding: 72px 24px; background: var(--cream);
+  border-top: 1px solid var(--tan); text-align: center;
+}
+.trusted-label {
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #999; margin-bottom: 28px; font-weight: 600;
+}
+.trusted-farms { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; }
+.trusted-farms span {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 18px;
+  color: var(--green-pale);
+}
+
+/* IMPACT */
+.impact {
+  padding: 100px 24px;
+  background: linear-gradient(165deg, var(--green) 0%, var(--dark) 100%);
+}
+.impact-inner { max-width: 900px; margin: 0 auto; }
+.impact h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(32px, 5vw, 48px); color: #fff;
+  font-weight: 400; margin: 0 0 24px; line-height: 1.15;
+}
+.impact-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px; margin-top: 40px;
+}
+.impact-grid .tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--orange); font-weight: 700; margin-bottom: 16px;
+}
+.impact-grid h3 {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 28px;
+  color: #fff; font-weight: 400; margin: 0 0 16px;
+}
+.impact-grid p {
+  font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; margin: 0;
+}
+
+/* FOUNDERS */
+.founders { padding: 100px 24px; background: var(--cream); }
+.founders-inner { max-width: 1000px; margin: 0 auto; }
+.founders-intro {
+  font-size: 17px; color: #777; max-width: 640px;
+  margin: 0 auto 64px; line-height: 1.7; text-align: center;
+}
+.founders-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+.founder-card {
+  background: #fff; border-radius: 16px; padding: 40px 32px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  border: 1px solid var(--tan);
+}
+.founder-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.founder-avatar span {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; color: #fff;
+}
+.founder-card h3 {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 28px;
+  color: var(--dark); font-weight: 400; margin: 0 0 4px;
+}
+.founder-card .role {
+  font-size: 13px; color: var(--orange); font-weight: 600;
+  letter-spacing: 0.05em; margin: 0 0 20px;
+}
+.founder-detail {
+  font-size: 14px; color: #777; line-height: 1.6; margin: 0 0 12px;
+  padding-left: 16px; border-left: 2px solid var(--tan);
+}
+
+/* FOOTER */
+.footer {
+  padding: 64px 24px 40px; background: var(--dark);
+  border-top: 3px solid var(--orange);
+}
+.footer-inner { max-width: 900px; margin: 0 auto; }
+.footer-grid {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  gap: 40px; margin-bottom: 48px;
+}
+.footer-logo {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: 22px;
+  color: #fff; letter-spacing: 0.04em; margin-bottom: 12px;
+}
+.footer-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; max-width: 280px; }
+.footer-label {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 16px; font-weight: 600;
+}
+.footer-name { font-size: 15px; color: rgba(255,255,255,0.7); margin: 0 0 8px; }
+.footer-phone { font-size: 14px; color: rgba(255,255,255,0.5); margin: 0 0 4px; }
+.footer-email { font-size: 14px; color: var(--orange); margin: 0; text-decoration: none; }
+.footer-email:hover { text-decoration: underline; }
+.footer-address { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      <div class="nav-logo-text">MIDP<span style="position:relative;display:inline-block">O<span class="nav-logo-dot"></span></span>INT</div>
+      <div class="nav-logo-sub">Organic<br>Transplants</div>
+    </a>
+    <div class="nav-links">
+      <a href="#serve">Who We Serve</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#story">Our Story</a>
+    </div>
+    <button class="nav-burger" id="burger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#serve" onclick="closeMobile()">Who We Serve</a>
+    <a href="#pricing" onclick="closeMobile()">Pricing</a>
+    <a href="#delivery" onclick="closeMobile()">Delivery</a>
+    <a href="#story" onclick="closeMobile()">Our Story</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-region">Santa Barbara &middot; Ventura &middot; San Luis Obispo</div>
+    <h1>For the <span class="accent">Farmers</span><br>That Grow<br>For <em>You</em></h1>
+    <p class="hero-sub">Certified organic vegetable transplants grown for small farms, delivered at cost across California's tri-county region.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">See Pricing</a>
+      <a href="#delivery" class="btn-secondary">Delivery Calculator</a>
+    </div>
+  </div>
+  <div class="hero-fade"></div>
+</section>
+
+<!-- WE SERVE -->
+<section class="serve" id="serve">
+  <div class="serve-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:64px;">
+      <h2 class="section-title" style="color:var(--dark)">We Serve</h2>
+      <div class="section-bar"></div>
+    </div>
+    <div class="serve-grid">
+      <div class="serve-card fade-in" style="background:var(--green)">
+        <div class="serve-card-icon">🌱</div>
+        <h3>Organic Farmers</h3>
+        <p>Small-batch transplants with rolling orders and no minimums that force you into varieties you don't need.</p>
+      </div>
+      <div class="serve-card fade-in d1" style="background:var(--green-light)">
+        <div class="serve-card-icon">🌿</div>
+        <h3>Native Plant Nurseries</h3>
+        <p>We extend your capacity by germinating organic plants you sell directly, freeing up your limited growing space.</p>
+      </div>
+      <div class="serve-card fade-in d2" style="background:var(--soil)">
+        <div class="serve-card-icon">🏡</div>
+        <h3>Home Garden Stores</h3>
+        <p>Retail-ready organic vegetable transplants in 4" pots and multi-packs, with minimums that actually work for you.</p>
+      </div>
+      <div class="serve-card fade-in d3" style="background:#4a6741">
+        <div class="serve-card-icon">🔬</div>
+        <h3>Research &amp; AgTech</h3>
+        <p>Custom propagation for research trials and agricultural technology companies needing consistent organic starts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:56px;">
+      <h2 class="section-title" style="color:var(--dark)">Our Prices</h2>
+      <p class="pricing-subtitle">Same price for every crop</p>
+      <div class="section-bar"></div>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card featured fade-in d1">
+        <div class="tag" style="color:var(--orange)">For Farms</div>
+        <h3>72-Cell Trays</h3>
+        <div class="price-row"><span class="label">Machine-seeded</span><span class="amount">$13</span></div>
+        <div class="price-row"><span class="label">Hand-seeded</span><span class="amount">$16</span></div>
+        <p class="note">Rolling orders welcome. No seasonal contracts required. Order as few trays as you need, when you need them.</p>
+      </div>
+      <div class="pricing-card fade-in d2" style="border:2px solid transparent;">
+        <div class="tag" style="color:var(--green-light)">For Retail Nurseries</div>
+        <h3>Retail Formats</h3>
+        <div class="price-row"><span class="label">4" Pots</span><span class="amount muted">Contact us</span></div>
+        <div class="price-row"><span class="label">4-6 Packs</span><span class="amount muted">Contact us</span></div>
+        <div class="price-row"><span class="label">6-12 Packs</span><span class="amount muted">Contact us</span></div>
+        <p class="note">Retail-ready organic transplants. We'll work with you on volumes and formats that fit your store.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY CALCULATOR -->
+<section class="delivery" id="delivery">
+  <div class="delivery-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <h2 class="section-title" style="color:#fff">Calculate Your Delivery Cost</h2>
+      <p class="section-sub" style="font-size:16px;color:rgba(255,255,255,0.6);margin:0 0 16px;">We deliver at cost within 100 miles, six days a week</p>
+      <div class="section-bar"></div>
+    </div>
+    <div class="delivery-box fade-in d1">
+      <div class="delivery-inputs">
+        <div>
+          <label>Distance (miles, one way)</label>
+          <input type="number" id="miles" placeholder="e.g. 30" min="0" max="100" oninput="calcDelivery()">
+        </div>
+        <div>
+          <label>Number of Trays</label>
+          <input type="number" id="trays" placeholder="e.g. 24" min="0" oninput="calcDelivery()">
+        </div>
+        <div>
+          <label>Unloading</label>
+          <div class="unload-btns">
+            <button class="unload-btn active" id="btn-rack" onclick="setUnload('rack')">You unload (rack drop)</button>
+            <button class="unload-btn" id="btn-we" onclick="setUnload('we')">We unload</button>
+          </div>
+        </div>
+      </div>
+      <div class="cost-breakdown" id="costBreakdown">
+        <div id="costLines"></div>
+        <div class="cost-total">
+          <span class="cost-total-label">Estimated Total</span>
+          <span class="cost-total-amount" id="totalAmount">$0.00</span>
+        </div>
+        <div class="cost-per-tray" id="perTray"></div>
+      </div>
+      <div class="bundle-notice" id="bundleNotice">
+        <p>Only need a few trays? If we can bundle your order with a nearby delivery within 10 miles, it's on us. Tell us what you need and when.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="trusted">
+  <div class="fade-in">
+    <p class="trusted-label">Trusted by local farms across the tri-county</p>
+    <div class="trusted-farms">
+      <span>Tutti Frutti Farm</span>
+      <span>Roots Organic Farm</span>
+      <span>Finley Farms</span>
+      <span>Frecker Farms</span>
+      <span>Poco Farm</span>
+      <span>Rincon Hill Farm</span>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact">
+  <div class="impact-inner">
+    <div class="fade-in">
+      <h2>We chose a site where we could cultivate more than plants</h2>
+    </div>
+    <div class="impact-grid">
+      <div class="fade-in d1">
+        <div class="tag">Our Partner</div>
+        <h3>Mesa</h3>
+        <p>Mesa helps young adults facing homelessness create possibilities for a new future through transitional housing, vocational training, job placement, and wrap-around services.</p>
+      </div>
+      <div class="fade-in d2">
+        <div class="tag">What We Provide</div>
+        <h3>Paid Work &amp; Training</h3>
+        <p>Midpoint offers Mesa residents paid work, job training, and free transplants for their own vegetable gardens. It's a window into the world of organic horticulture and a path toward real skills and independence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="founders" id="story">
+  <div class="founders-inner">
+    <div class="fade-in" style="text-align:center;">
+      <h2 class="section-title" style="color:var(--dark)">Meet Your Growers</h2>
+      <div class="section-bar" style="margin-bottom:32px;"></div>
+      <p class="founders-intro">In 2025, the last local nursery serving our market farms permanently lost its organic certification. That left farmers with large commercial operations that don't serve small accounts, DIY propagation that pulls labor off the fields, or giving up organic certification entirely. We started Midpoint because those aren't real choices.</p>
+    </div>
+    <div class="founders-grid">
+      <div class="founder-card fade-in d1">
+        <div class="founder-avatar" style="background:var(--green)"><span>SM</span></div>
+        <h3>Shannon Myers</h3>
+        <p class="role">Co-Founder</p>
+        <p class="founder-detail">Nearly 20 years nursery growing and management experience</p>
+        <p class="founder-detail">MSc Agronomy, BSc Horticulture & Crop Sciences</p>
+        <p class="founder-detail">Expertise in plant biology, complex order fulfillment, and large-scale account management</p>
+      </div>
+      <div class="founder-card fade-in d2">
+        <div class="founder-avatar" style="background:var(--soil)"><span>CF</span></div>
+        <h3>Christopher Fiorello</h3>
+        <p class="role">Co-Founder</p>
+        <p class="founder-detail">3.5 years managing a small regenerative organic farm</p>
+        <p class="founder-detail">Deep knowledge of small-scale organic transplant production and small farm customer needs</p>
+        <p class="founder-detail">11 years professional marketing experience for nonprofits and Fortune 500 companies</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">MIDPOINT</div>
+        <p class="footer-desc">Certified organic vegetable transplants for small farms across Santa Barbara, Ventura, and San Luis Obispo counties.</p>
+      </div>
+      <div>
+        <p class="footer-label">Contact</p>
+        <p class="footer-name">Christopher Fiorello</p>
+        <p class="footer-phone">805-869-3574</p>
+        <a class="footer-email" href="mailto:christopher@midpointorganics.com">christopher@midpointorganics.com</a>
+      </div>
+      <div>
+        <p class="footer-label">Location</p>
+        <p class="footer-address">1114 East Haley Street<br>Santa Barbara, CA 93103</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Midpoint Organic Transplants, LLC</p>
+      <p>Ojai, California</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV
+let mobileOpen = false;
+function toggleMobile() {
+  mobileOpen = !mobileOpen;
+  document.getElementById('mobileMenu').classList.toggle('open', mobileOpen);
+}
+function closeMobile() {
+  mobileOpen = false;
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// INTERSECTION OBSERVER
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// DELIVERY CALCULATOR
+let unloadMode = 'rack';
+
+function setUnload(mode) {
+  unloadMode = mode;
+  document.getElementById('btn-rack').classList.toggle('active', mode === 'rack');
+  document.getElementById('btn-we').classList.toggle('active', mode === 'we');
+  calcDelivery();
+}
+
+function calcDelivery() {
+  const miles = parseFloat(document.getElementById('miles').value) || 0;
+  const trays = parseInt(document.getElementById('trays').value) || 0;
+
+  if (miles <= 0) {
+    document.getElementById('costBreakdown').classList.remove('show');
+    document.getElementById('bundleNotice').classList.remove('show');
+    return;
+  }
+
+  const fuel = miles * 2 * (5 / 15);
+  const maint = miles * 2 * 0.25;
+  const truck = miles * 2 * 0.20;
+  const logistics = 15;
+  const unloadCost = unloadMode === 'we' ? trays * 0.05 : 0;
+  const driverHrs = (miles * 2) / 35;
+  const driver = driverHrs * 25;
+  const total = fuel + maint + truck + logistics + unloadCost + driver;
+
+  let html = '';
+  html += costLine('Fuel ($5/gal @ 15 mpg)', fuel);
+  html += costLine('Maintenance & repairs ($0.25/mi)', maint);
+  html += costLine('Truck payment ($0.20/mi)', truck);
+  html += costLine('Logistics fee', logistics);
+  if (unloadMode === 'we' && trays > 0) {
+    html += costLine('Unloading ($0.05/tray × ' + trays + ')', unloadCost);
+  }
+  html += costLine('Driver ($25/hr × ' + driverHrs.toFixed(1) + 'hr)', driver);
+
+  document.getElementById('costLines').innerHTML = html;
+  document.getElementById('totalAmount').textContent = '$' + total.toFixed(2);
+
+  if (trays > 0) {
+    document.getElementById('perTray').textContent = '$' + (total / trays).toFixed(2) + ' per tray';
+  } else {
+    document.getElementById('perTray').textContent = '';
+  }
+
+  document.getElementById('costBreakdown').classList.add('show');
+
+  const canBundle = trays > 0 && trays < 50 && miles <= 10;
+  document.getElementById('bundleNotice').classList.toggle('show', canBundle);
+}
+
+function costLine(label, amount) {
+  return '<div class="cost-line"><span class="cl-label">' + label + '</span><span class="cl-amount">$' + amount.toFixed(2) + '</span></div>';
+}
+</script>
+</body>
+</html>
