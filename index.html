@@ -24,7 +24,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body { font-family: 'DM Sans', sans-serif; background: var(--cream); overflow-x: hidden; color: var(--dark); }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { -moz-appearance: textfield; }
@@ -65,7 +65,7 @@ input[type=number] { -moz-appearance: textfield; }
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo {
-  display: flex; align-items: center; gap: 10; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
   text-decoration: none;
 }
 .nav-logo-text {
@@ -83,14 +83,15 @@ input[type=number] { -moz-appearance: textfield; }
   color: rgba(255,255,255,0.8); font-weight: 500; transition: color 0.4s; line-height: 1.2;
 }
 .nav.scrolled .nav-logo-sub { color: var(--green-light); }
-.nav-links { display: flex; gap: 32; align-items: center; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
 .nav-links a {
   font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
   letter-spacing: 0.02em; color: rgba(255,255,255,0.9);
   text-decoration: none; padding: 4px 0;
   border-bottom: 2px solid transparent; transition: all 0.3s;
 }
-.nav-links a:hover { border-bottom-color: var(--orange); }
+.nav-links a:hover, .nav-links a:focus-visible { border-bottom-color: var(--orange); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 .nav.scrolled .nav-links a { color: var(--dark); }
 .nav-burger {
   display: none; background: none; border: none; cursor: pointer; padding: 8px;
@@ -116,6 +117,13 @@ input[type=number] { -moz-appearance: textfield; }
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-burger { display: flex; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .founders-grid { grid-template-columns: 1fr; }
+  .serve-card p { opacity: 1; max-height: 200px; }
+  .serve-card { min-height: auto; }
+  .hero h1 { font-size: clamp(36px, 10vw, 56px); }
+  .footer-grid { flex-direction: column; gap: 32px; }
+  .sticky-cta { display: flex; }
 }
 
 /* HERO */
@@ -154,7 +162,7 @@ input[type=number] { -moz-appearance: textfield; }
   opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
 }
 .hero-btns {
-  display: flex; gap: 16; justify-content: center; flex-wrap: wrap;
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
   opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
 }
 .btn-primary {
@@ -291,7 +299,9 @@ input[type=number] { -moz-appearance: textfield; }
   background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);
   font-weight: 400; transition: all 0.2s;
 }
+.unload-btn:hover { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.8); }
 .unload-btn.active { background: var(--orange); color: #fff; font-weight: 600; }
+.unload-btn.active:hover { background: #d46915; }
 .cost-breakdown {
   border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
   display: none;
@@ -426,6 +436,87 @@ input[type=number] { -moz-appearance: textfield; }
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
 }
 .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); margin: 0; }
+
+/* NAV CTA BUTTON */
+.nav-cta {
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  background: var(--orange); color: #fff; border: none;
+  padding: 8px 20px; border-radius: 6px; cursor: pointer;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(232,117,26,0.3);
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(232,117,26,0.4); }
+.nav.scrolled .nav-cta { background: var(--orange); color: #fff; }
+
+/* HERO SCROLL INDICATOR */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+.hero-scroll {
+  position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+}
+.hero-scroll-text {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); font-weight: 500;
+}
+.hero-scroll-arrow {
+  width: 20px; height: 20px; border-right: 2px solid rgba(255,255,255,0.4);
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  transform: rotate(45deg); animation: scrollBounce 2s ease infinite;
+}
+
+/* HERO TEXTURE OVERLAY */
+.hero-texture {
+  position: absolute; inset: 0; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* DISTANCE WARNING */
+.distance-warning {
+  margin-top: 16px; padding: 14px 18px; border-radius: 10px;
+  background: rgba(220,53,69,0.12); border: 1px solid rgba(220,53,69,0.25);
+  display: none; font-size: 14px; color: #f5a0a0; line-height: 1.5;
+}
+.distance-warning.show { display: flex; align-items: center; gap: 10px; }
+.distance-warning svg { flex-shrink: 0; }
+
+/* FOOTER CTA SECTION */
+.footer-cta {
+  text-align: center; padding: 48px 24px;
+  background: linear-gradient(170deg, var(--green) 0%, var(--dark) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.footer-cta h3 {
+  font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(28px, 4vw, 40px);
+  color: #fff; font-weight: 400; margin: 0 0 8px;
+}
+.footer-cta p {
+  font-size: 16px; color: rgba(255,255,255,0.6); margin: 0 0 28px;
+}
+.footer-cta .btn-primary { display: inline-block; }
+.footer-cta .btn-primary:hover { transform: translateY(-2px); }
+
+/* STICKY MOBILE CTA */
+.sticky-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+  padding: 12px 24px; background: rgba(250,246,240,0.97);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--tan);
+  justify-content: center; align-items: center; gap: 12px;
+}
+.sticky-cta-text {
+  font-size: 14px; color: var(--dark); font-weight: 500;
+}
+.sticky-cta .btn-primary { padding: 10px 24px; font-size: 14px; }
+
+/* TRUSTED FARM SEPARATORS */
+.trusted-farms span { position: relative; }
+.trusted-farms span:not(:last-child)::after {
+  content: '\00b7'; margin-left: 32px;
+  color: var(--tan); font-size: 24px; vertical-align: middle;
+}
 </style>
 </head>
 <body>
@@ -442,8 +533,9 @@ input[type=number] { -moz-appearance: textfield; }
       <a href="#pricing">Pricing</a>
       <a href="#delivery">Delivery</a>
       <a href="#story">Our Story</a>
+      <a href="mailto:christopher@midpointorganics.com" class="nav-cta">Get in Touch</a>
     </div>
-    <button class="nav-burger" id="burger" onclick="toggleMobile()">
+    <button class="nav-burger" id="burger" onclick="toggleMobile()" aria-label="Toggle navigation menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -452,12 +544,14 @@ input[type=number] { -moz-appearance: textfield; }
     <a href="#pricing" onclick="closeMobile()">Pricing</a>
     <a href="#delivery" onclick="closeMobile()">Delivery</a>
     <a href="#story" onclick="closeMobile()">Our Story</a>
+    <a href="mailto:christopher@midpointorganics.com" onclick="closeMobile()" style="color:var(--orange);font-weight:600;">Get in Touch &rarr;</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
+  <div class="hero-texture"></div>
   <div class="hero-content">
     <div class="hero-region">Santa Barbara &middot; Ventura &middot; San Luis Obispo</div>
     <h1>For the <span class="accent">Farmers</span><br>That Grow<br>For <em>You</em></h1>
@@ -466,6 +560,10 @@ input[type=number] { -moz-appearance: textfield; }
       <a href="#pricing" class="btn-primary">See Pricing</a>
       <a href="#delivery" class="btn-secondary">Delivery Calculator</a>
     </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-text">Scroll</span>
+    <div class="hero-scroll-arrow"></div>
   </div>
   <div class="hero-fade"></div>
 </section>
@@ -567,6 +665,10 @@ input[type=number] { -moz-appearance: textfield; }
       <div class="bundle-notice" id="bundleNotice">
         <p>Only need a few trays? If we can bundle your order with a nearby delivery within 10 miles, it's on us. Tell us what you need and when.</p>
       </div>
+      <div class="distance-warning" id="distanceWarning">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f5a0a0" stroke-width="1.5"/><path d="M10 6v5M10 13.5v.5" stroke="#f5a0a0" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>We deliver within 100 miles of our location. For distances beyond that, please contact us to discuss options.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -636,6 +738,15 @@ input[type=number] { -moz-appearance: textfield; }
   </div>
 </section>
 
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <div class="fade-in">
+    <h3>Ready to grow?</h3>
+    <p>Tell us what you need and we'll get back to you within 24 hours.</p>
+    <a href="mailto:christopher@midpointorganics.com" class="btn-primary">Get in Touch</a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -661,6 +772,12 @@ input[type=number] { -moz-appearance: textfield; }
     </div>
   </div>
 </footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-text">Ready to order?</span>
+  <a href="mailto:christopher@midpointorganics.com" class="btn-primary">Get in Touch</a>
+</div>
 
 <script>
 // NAV
@@ -707,6 +824,16 @@ function calcDelivery() {
   if (miles <= 0) {
     document.getElementById('costBreakdown').classList.remove('show');
     document.getElementById('bundleNotice').classList.remove('show');
+    document.getElementById('distanceWarning').classList.remove('show');
+    return;
+  }
+
+  // Show warning if over 100 miles
+  const overLimit = miles > 100;
+  document.getElementById('distanceWarning').classList.toggle('show', overLimit);
+  if (overLimit) {
+    document.getElementById('costBreakdown').classList.remove('show');
+    document.getElementById('bundleNotice').classList.remove('show');
     return;
   }
 
@@ -747,6 +874,25 @@ function calcDelivery() {
 function costLine(label, amount) {
   return '<div class="cost-line"><span class="cl-label">' + label + '</span><span class="cl-amount">$' + amount.toFixed(2) + '</span></div>';
 }
+
+// STICKY CTA — show after scrolling past hero on mobile
+const stickyCta = document.getElementById('stickyCta');
+const heroEl = document.querySelector('.hero');
+const heroScroll = document.querySelector('.hero-scroll');
+
+window.addEventListener('scroll', () => {
+  const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
+  if (window.scrollY > heroBottom && window.innerWidth <= 768) {
+    stickyCta.style.display = 'flex';
+  } else {
+    stickyCta.style.display = '';
+  }
+  // Fade out scroll indicator
+  if (heroScroll && window.scrollY > 100) {
+    heroScroll.style.opacity = '0';
+    heroScroll.style.transition = 'opacity 0.5s';
+  }
+});
 </script>
 </body>
 </html>
