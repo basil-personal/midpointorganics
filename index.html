@@ -216,7 +216,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   letter-spacing: 0.04em; color: #fff; margin: 0 0 8px;
 }
 .serve-card p {
-  font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6; margin: 0;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.9); line-height: 1.6; margin: 0;
   max-height: 0; opacity: 0; overflow: hidden;
   transition: max-height 0.5s ease, opacity 0.4s ease;
 }
@@ -255,8 +255,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .price-row .label { font-size: 14px; color: var(--dark); font-weight: 500; }
 .price-row .amount { font-size: 22px; font-weight: 800; color: var(--dark); }
-.price-row .amount.muted { font-size: 12px; font-weight: 600; color: var(--green-light); letter-spacing: 0.05em; text-transform: uppercase; }
-.pricing-card .note { font-size: 13px; color: #999; margin-top: 24px; line-height: 1.6; }
+.price-row .amount.muted { font-size: 13px; font-weight: 700; color: var(--green-light); letter-spacing: 0.05em; text-transform: uppercase; }
+.pricing-card .note { font-size: 14px; font-weight: 500; color: #777; margin-top: 24px; line-height: 1.7; }
 
 /* EDITORIAL IMAGE SECTION — inset with rounded corners */
 .full-image {
@@ -286,7 +286,21 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .delivery { padding: 120px 0; background: var(--dark); }
 .delivery .section-label { color: var(--orange); }
 .delivery .section-heading { color: #fff; }
-.delivery-sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 48px; }
+.delivery-sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.delivery-address { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 48px; font-weight: 500; }
+.delivery-address svg { display: inline-block; vertical-align: -2px; margin-right: 6px; }
+.few-trays {
+  margin-top: 40px; padding: 32px 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+}
+.few-trays h3 {
+  font-size: 20px; font-weight: 800; text-transform: uppercase;
+  color: #fff; margin: 0 0 12px;
+}
+.few-trays p {
+  font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0 0 20px;
+}
+.few-trays .btn-primary { font-size: 11px; }
 .delivery-box {
   background: rgba(255,255,255,0.04); padding: 40px 36px;
   border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
@@ -374,15 +388,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   gap: 40px; margin-top: 48px;
 }
 .impact-grid .tag {
-  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--orange); font-weight: 700; margin-bottom: 12px;
 }
 .impact-grid h3 {
-  font-size: 22px; font-weight: 800; text-transform: uppercase;
-  color: #fff; margin: 0 0 12px;
+  font-size: 24px; font-weight: 800; text-transform: uppercase;
+  color: #fff; margin: 0 0 14px;
 }
 .impact-grid p {
-  font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; margin: 0;
+  font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1.75; margin: 0;
 }
 /* FOUNDERS */
 .founders { padding: 120px 0; background: var(--cream); }
@@ -420,27 +434,56 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   padding-left: 16px; border-left: 2px solid var(--tan);
 }
 
-/* VALUE PROPS — Natoora three-column pattern */
-.value-props { padding: 100px 0; background: var(--cream); }
-.value-props-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+/* CONTACT FORM */
+.contact { padding: 120px 0; background: var(--warm-white); }
+.contact-header { margin-bottom: 48px; }
+.contact-header .section-label { color: var(--orange); }
+.contact-header .section-heading { color: var(--dark); }
+.contact-sub {
+  font-size: 16px; font-weight: 500; color: #777; line-height: 1.7;
+  max-width: 520px; margin: 0;
 }
-.value-prop-icon {
-  font-size: 32px; margin-bottom: 20px; display: block;
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
 }
-.value-prop h3 {
-  font-size: 16px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.03em; color: var(--dark); margin: 0 0 12px;
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.contact-form label {
+  display: block; font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--dark); margin-bottom: 8px; font-weight: 700;
 }
-.value-prop p {
-  font-size: 14px; color: #888; line-height: 1.7; margin: 0 0 16px;
+.contact-form input,
+.contact-form textarea {
+  width: 100%; padding: 14px 16px; border-radius: 6px;
+  border: 1px solid var(--tan); background: #fff;
+  color: var(--dark); font-family: 'Montserrat', sans-serif; font-size: 15px;
+  outline: none; transition: border-color 0.3s;
 }
-.value-prop a {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
-  text-transform: uppercase; color: var(--dark); text-decoration: underline;
-  text-underline-offset: 3px; transition: color 0.3s;
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: var(--dark); }
+.contact-form textarea { min-height: 140px; resize: vertical; }
+.contact-form .btn-primary { align-self: flex-start; border: none; }
+.contact-info { display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+.contact-info-item h4 {
+  font-size: 13px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--dark); margin: 0 0 8px;
 }
-.value-prop a:hover { color: var(--orange); }
+.contact-info-item p,
+.contact-info-item a {
+  font-size: 15px; font-weight: 500; color: #777; line-height: 1.6;
+  text-decoration: none; margin: 0; display: block;
+}
+.contact-info-item a:hover { color: var(--orange); }
+.contact-success {
+  display: none; padding: 24px; border-radius: 8px;
+  background: rgba(88,129,87,0.08); border: 1px solid rgba(88,129,87,0.2);
+  text-align: center;
+}
+.contact-success.show { display: block; }
+.contact-success h4 {
+  font-size: 18px; font-weight: 800; color: var(--green); margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.contact-success p { font-size: 15px; font-weight: 500; color: #777; margin: 0; line-height: 1.6; }
 
 /* FOOTER CTA — inset editorial image */
 .footer-cta {
@@ -528,7 +571,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   .hero { margin: 16px 32px 0; }
   .footer-right { gap: 40px; }
   .impact-grid { gap: 24px; }
-  .value-props-grid { gap: 32px; }
 }
 
 /* MOBILE (≤768px) — consolidated */
@@ -557,6 +599,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 
   .delivery { padding: 80px 0; }
   .delivery-box { padding: 28px 20px; }
+  .few-trays { padding: 24px 20px; }
 
   .trusted-farms { gap: 8px 24px; }
 
@@ -568,8 +611,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   .founders-grid { grid-template-columns: 1fr; }
   .founder-card { padding: 32px 24px; }
 
-  .value-props { padding: 60px 0; }
-  .value-props-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact { padding: 80px 0; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-info { flex-direction: row; flex-wrap: wrap; gap: 24px; }
 
   .footer-cta { margin: 0 20px; min-height: 40vh; }
   .footer-cta-content { padding: 60px 20px; }
@@ -594,7 +638,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
       <a href="#pricing">Pricing</a>
       <a href="#delivery">Delivery</a>
       <a href="#story">Our Story</a>
-      <a href="mailto:christopher@midpointorganics.com" class="nav-cta">Get in Touch &rarr;</a>
+      <a href="#contact" class="nav-cta">Contact &rarr;</a>
     </div>
     <button class="nav-burger" id="burger" onclick="toggleMobile()" aria-label="Toggle navigation menu">
       <span></span><span></span><span></span>
@@ -605,7 +649,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
     <a href="#pricing" onclick="closeMobile()">Pricing</a>
     <a href="#delivery" onclick="closeMobile()">Delivery</a>
     <a href="#story" onclick="closeMobile()">Our Story</a>
-    <a href="mailto:christopher@midpointorganics.com" onclick="closeMobile()" style="color:var(--orange);font-weight:700;">Get in Touch &rarr;</a>
+    <a href="#contact" onclick="closeMobile()" style="color:var(--orange);font-weight:700;">Contact &rarr;</a>
   </div>
 </nav>
 
@@ -698,6 +742,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
       <div class="section-label">Delivery Calculator</div>
       <h2 class="section-heading">Calculate Your<br>Delivery Cost</h2>
       <p class="delivery-sub">We deliver at cost within 100 miles, six days a week.</p>
+      <p class="delivery-address"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Delivering from 400 Gotham Road, Ojai, CA 93023</p>
     </div>
     <div class="delivery-box fade-in d1">
       <div class="delivery-inputs">
@@ -732,6 +777,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f5a0a0" stroke-width="1.5"/><path d="M10 6v5M10 13.5v.5" stroke="#f5a0a0" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span>We deliver within 100 miles of our location. For distances beyond that, please contact us to discuss options.</span>
       </div>
+    </div>
+    <div class="few-trays fade-in d2">
+      <h3>Only need a few trays delivered?</h3>
+      <p>If we can bundle your order with a nearby delivery within 10 miles, the delivery is on us. Tell us what you need and when — we'll see if we can make it work.</p>
+      <a href="#contact" class="btn-primary">Tell Us What You Need &rarr;</a>
     </div>
   </div>
 </section>
@@ -803,27 +853,55 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   </div>
 </section>
 
-<!-- VALUE PROPS — Natoora three-column editorial -->
-<section class="value-props">
+<!-- CONTACT FORM -->
+<section class="contact" id="contact">
   <div class="container">
-    <div class="value-props-grid">
-      <div class="value-prop fade-in">
-        <span class="value-prop-icon">&#x1F331;</span>
-        <h3>Certified Organic</h3>
-        <p>Every transplant is USDA certified organic. No synthetic pesticides, no shortcuts. The same standard your farm holds, we hold.</p>
-        <a href="#pricing">See our pricing</a>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <div class="contact-header">
+          <div class="section-label">Get in Touch</div>
+          <h2 class="section-heading">Ready<br>to Grow?</h2>
+        </div>
+        <p class="contact-sub">Tell us what you need and we'll get back to you within 24 hours. Whether it's a quick question or a full order, we're here.</p>
+        <div class="contact-info" style="margin-top:40px;">
+          <div class="contact-info-item">
+            <h4>Call</h4>
+            <a href="tel:8058693574">805-869-3574</a>
+          </div>
+          <div class="contact-info-item">
+            <h4>Email</h4>
+            <a href="mailto:christopher@midpointorganics.com">christopher@midpointorganics.com</a>
+          </div>
+          <div class="contact-info-item">
+            <h4>Location</h4>
+            <p>400 Gotham Road, Ojai, CA 93023</p>
+          </div>
+        </div>
       </div>
-      <div class="value-prop fade-in d1">
-        <span class="value-prop-icon">&#x1F69A;</span>
-        <h3>Delivered at Cost</h3>
-        <p>We don't mark up delivery. Use our calculator to see the exact cost breakdown — fuel, labor, maintenance. Full transparency.</p>
-        <a href="#delivery">Calculate delivery</a>
-      </div>
-      <div class="value-prop fade-in d2">
-        <span class="value-prop-icon">&#x1F91D;</span>
-        <h3>Community Rooted</h3>
-        <p>Our site partners with Mesa to provide paid work and job training for young adults facing homelessness. Growing plants, growing futures.</p>
-        <a href="#story">Read our story</a>
+      <div class="fade-in d1">
+        <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
+          <div>
+            <label for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" name="name" placeholder="e.g. Sarah Johnson" required>
+          </div>
+          <div>
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" placeholder="e.g. sarah@example.com" required>
+          </div>
+          <div>
+            <label for="contact-farm">Farm / Business Name</label>
+            <input type="text" id="contact-farm" name="farm" placeholder="e.g. Sunny Acres Farm">
+          </div>
+          <div>
+            <label for="contact-message">What do you need?</label>
+            <textarea id="contact-message" name="message" placeholder="Tell us about your transplant needs — varieties, quantities, timeline..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send Message &rarr;</button>
+        </form>
+        <div class="contact-success" id="contactSuccess">
+          <h4>Message Sent!</h4>
+          <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -835,7 +913,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   <div class="footer-cta-content fade-in">
     <h3>Ready to Grow?</h3>
     <p>Tell us what you need and we'll get back to you within 24 hours.</p>
-    <a href="mailto:christopher@midpointorganics.com" class="btn-primary">Get in Touch &rarr;</a>
+    <a href="#contact" class="btn-primary">Get in Touch &rarr;</a>
   </div>
 </section>
 
@@ -882,7 +960,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta" id="stickyCta">
   <span class="sticky-cta-text">Ready to order?</span>
-  <a href="mailto:christopher@midpointorganics.com" class="btn-primary">Get in Touch &rarr;</a>
+  <a href="#contact" class="btn-primary">Get in Touch &rarr;</a>
 </div>
 
 <script>
@@ -994,6 +1072,25 @@ function calcDelivery() {
 
 function costLine(label, amount) {
   return '<div class="cost-line"><span class="cl-label">' + label + '</span><span class="cl-amount">$' + amount.toFixed(2) + '</span></div>';
+}
+
+// CONTACT FORM — submit handler
+function submitContact(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const name = document.getElementById('contact-name').value;
+  const email = document.getElementById('contact-email').value;
+  const farm = document.getElementById('contact-farm').value;
+  const message = document.getElementById('contact-message').value;
+
+  // Build mailto fallback with form data pre-filled
+  const subject = encodeURIComponent('Inquiry from ' + name + (farm ? ' (' + farm + ')' : ''));
+  const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + (farm ? '\nFarm: ' + farm : '') + '\n\n' + message);
+  window.location.href = 'mailto:christopher@midpointorganics.com?subject=' + subject + '&body=' + body;
+
+  // Show success state
+  form.style.display = 'none';
+  document.getElementById('contactSuccess').classList.add('show');
 }
 
 // STICKY MOBILE CTA — show after hero, hide near footer
