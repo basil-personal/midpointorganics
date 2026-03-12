@@ -1074,23 +1074,34 @@ function costLine(label, amount) {
   return '<div class="cost-line"><span class="cl-label">' + label + '</span><span class="cl-amount">$' + amount.toFixed(2) + '</span></div>';
 }
 
-// CONTACT FORM — submit handler
+// CONTACT FORM — Formspree integration
+// Submissions go to christopher@midpointorganics.com via Formspree
 function submitContact(e) {
   e.preventDefault();
   const form = document.getElementById('contactForm');
-  const name = document.getElementById('contact-name').value;
-  const email = document.getElementById('contact-email').value;
-  const farm = document.getElementById('contact-farm').value;
-  const message = document.getElementById('contact-message').value;
+  const btn = form.querySelector('button[type="submit"]');
+  const origText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-  // Build mailto fallback with form data pre-filled
-  const subject = encodeURIComponent('Inquiry from ' + name + (farm ? ' (' + farm + ')' : ''));
-  const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + (farm ? '\nFarm: ' + farm : '') + '\n\n' + message);
-  window.location.href = 'mailto:christopher@midpointorganics.com?subject=' + subject + '&body=' + body;
-
-  // Show success state
-  form.style.display = 'none';
-  document.getElementById('contactSuccess').classList.add('show');
+  fetch('https://formspree.io/f/xrgnqozv', {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  }).then(function(response) {
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('contactSuccess').classList.add('show');
+    } else {
+      btn.textContent = origText;
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email christopher@midpointorganics.com directly.');
+    }
+  }).catch(function() {
+    btn.textContent = origText;
+    btn.disabled = false;
+    alert('Something went wrong. Please try again or email christopher@midpointorganics.com directly.');
+  });
 }
 
 // STICKY MOBILE CTA — show after hero, hide near footer
