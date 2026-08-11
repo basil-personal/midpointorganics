@@ -655,35 +655,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div id="gate" style="position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;align-items:center;justify-content:center;padding:20px;">
-  <form id="gate-form" style="background:var(--warm-white);padding:48px 40px;border-radius:8px;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.35);">
-    <img src="Images/midpoint-logo-trimmed.png" alt="Midpoint Organic Transplants" style="max-width:180px;margin-bottom:24px;">
-    <p style="font-family:'Montserrat',sans-serif;color:var(--dark);margin-bottom:16px;font-size:14px;">This site is a preview. Enter the password to continue.</p>
-    <input id="gate-input" type="password" placeholder="Password" autofocus style="width:100%;padding:12px 14px;border:1px solid var(--tan);border-radius:4px;font-family:'Montserrat',sans-serif;font-size:15px;margin-bottom:12px;">
-    <button type="submit" style="width:100%;padding:12px 14px;background:var(--green);color:#fff;border:none;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;cursor:pointer;">Enter</button>
-    <p id="gate-error" style="display:none;color:var(--orange);font-size:13px;margin-top:12px;">Incorrect password, try again.</p>
-  </form>
-</div>
-<script>
-(function() {
-  var PASSWORD = "letitgrow";
-  if (sessionStorage.getItem("mo_gate_ok") === "1") {
-    document.getElementById("gate").style.display = "none";
-  }
-  document.getElementById("gate-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    var val = document.getElementById("gate-input").value;
-    if (val === PASSWORD) {
-      sessionStorage.setItem("mo_gate_ok", "1");
-      document.getElementById("gate").style.display = "none";
-    } else {
-      document.getElementById("gate-error").style.display = "block";
-    }
-  });
-})();
-</script>
-
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
