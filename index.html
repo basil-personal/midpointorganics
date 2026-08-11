@@ -70,14 +70,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   border-bottom: 1px solid rgba(0,0,0,0.06); padding: 14px 0;
 }
 .nav-inner {
-  max-width: 1280px; margin: 0 auto; padding: 0 40px;
+  padding: 0 40px;
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo {
-  font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--black);
-  text-decoration: none; transition: color 0.4s; cursor: pointer;
+  display: flex; align-items: center;
+  text-decoration: none; cursor: pointer;
 }
+.nav-logo img { height: 44px; width: auto; display: block; }
 .nav-links { display: flex; gap: 36px; align-items: center; }
 .nav-links a {
   font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
@@ -120,9 +120,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .hero-img {
   position: absolute; inset: 0;
-  background: url('https://images.pexels.com/photos/736779/pexels-photo-736779.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
   border-radius: 12px;
 }
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 12px;
+  opacity: 0; transition: opacity 1.5s ease;
+}
+.hero-slide.active { opacity: 1; }
 .hero-img::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.3) 100%);
@@ -239,7 +245,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
-.pricing-card.featured { border: 2px solid var(--dark); }
+.pricing-card.featured { border: 1px solid var(--tan); }
 .pricing-card .tag {
   font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
   font-weight: 700; margin-bottom: 8px; color: var(--green-light);
@@ -257,6 +263,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 .price-row .amount { font-size: 22px; font-weight: 800; color: var(--dark); }
 .price-row .amount.muted { font-size: 13px; font-weight: 700; color: var(--green-light); letter-spacing: 0.05em; text-transform: uppercase; }
 .pricing-card .note { font-size: 14px; font-weight: 500; color: #777; margin-top: 24px; line-height: 1.7; }
+.format-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.format-pills span {
+  font-size: 13px; font-weight: 600; color: var(--dark);
+  border: 1px solid var(--tan); border-radius: 999px; padding: 8px 16px;
+}
+.card-cta {
+  display: inline-block; margin-top: 28px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dark); text-decoration: none;
+  border: 1.5px solid var(--dark); border-radius: 999px;
+  padding: 12px 24px; transition: all 0.3s;
+}
+.card-cta:hover { background: var(--dark); color: #fff; }
 
 /* EDITORIAL IMAGE SECTION — inset with rounded corners */
 .full-image {
@@ -271,7 +290,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 .full-image-bg::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);
+  background: linear-gradient(to right, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 100%);
   border-radius: 12px;
 }
 .full-image-content {
@@ -411,26 +430,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
 }
 .founder-card {
-  padding: 40px 32px; border: 1px solid var(--tan); background: #fff;
+  padding: 24px; border: 1px solid var(--tan); background: #fff;
   border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .founder-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+.founder-header { text-align: center; margin-bottom: 20px; }
+.founder-body { display: flex; align-items: center; gap: 20px; }
+.founder-details { flex: 1; min-width: 0; }
 .founder-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
+  width: 140px; height: 140px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0; position: relative;
 }
-.founder-avatar span { font-size: 18px; font-weight: 800; color: #fff; }
+.founder-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.founder-avatar img.avatar-christopher {
+  position: absolute; left: -15%; top: -12.5%;
+  width: 130%; height: 130%; object-fit: cover;
+}
 .founder-card h3 {
   font-size: 20px; font-weight: 800; text-transform: uppercase;
   color: var(--dark); margin: 0 0 4px;
 }
 .founder-card .role {
   font-size: 11px; color: var(--orange); font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 24px;
+  letter-spacing: 0.1em; text-transform: uppercase; margin: 0;
 }
 .founder-detail {
-  font-size: 13px; color: #888; line-height: 1.6; margin: 0 0 12px;
+  font-size: 13px; color: #888; line-height: 1.5; margin: 0 0 10px;
   padding-left: 16px; border-left: 2px solid var(--tan);
 }
 
@@ -515,42 +540,41 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 }
 
 /* FOOTER — Natoora editorial style */
-.footer { padding: 80px 0 40px; background: var(--dark); margin-top: 80px; }
+.footer { padding: 24px 0; background: var(--cream); margin-top: 6px; }
 .footer-grid {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 64px; margin-bottom: 64px;
 }
 .footer-headline {
   font-size: clamp(28px, 4vw, 42px); font-weight: 900;
-  text-transform: uppercase; color: #fff; line-height: 1.05;
+  text-transform: uppercase; color: var(--dark); line-height: 1.05;
   margin: 0 0 32px; max-width: 400px;
 }
-.footer-desc { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 360px; margin: 0 0 32px; }
+.footer-desc { font-size: 14px; color: rgba(0,0,0,0.45); line-height: 1.7; max-width: 360px; margin: 0 0 32px; }
 .footer-social { display: flex; gap: 24px; }
 .footer-social a {
   font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  text-transform: uppercase; color: rgba(0,0,0,0.5);
   text-decoration: none; transition: color 0.3s;
 }
-.footer-social a:hover { color: #fff; }
+.footer-social a:hover { color: var(--dark); }
 .footer-right { display: flex; gap: 64px; }
 .footer-col-title {
   font-size: 13px; font-weight: 800; letter-spacing: 0.05em;
-  text-transform: uppercase; color: #fff; margin: 0 0 20px;
+  text-transform: uppercase; color: var(--dark); margin: 0 0 20px;
   text-decoration: underline; text-underline-offset: 4px;
   text-decoration-thickness: 1.5px;
 }
 .footer-col a, .footer-col p {
-  display: block; font-size: 14px; color: rgba(255,255,255,0.5);
+  display: block; font-size: 14px; color: rgba(0,0,0,0.5);
   text-decoration: none; margin: 0 0 12px; transition: color 0.3s;
   line-height: 1.4; overflow-wrap: break-word; word-break: break-word;
 }
-.footer-col a:hover { color: #fff; }
+.footer-col a:hover { color: var(--dark); }
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
 }
-.footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.2); margin: 0; }
+.footer-bottom p { font-size: 11px; color: rgba(0,0,0,0.35); margin: 0; }
 
 /* STICKY MOBILE CTA */
 .sticky-cta {
@@ -609,7 +633,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 
   .founders { padding: 80px 0; }
   .founders-grid { grid-template-columns: 1fr; }
-  .founder-card { padding: 32px 24px; }
+  .founder-card { padding: 28px 24px; }
+  .founder-body { flex-direction: column; text-align: center; }
+  .founder-avatar { width: 140px; height: 140px; }
+  .founder-detail { border-left: none; padding-left: 0; }
 
   .contact { padding: 80px 0; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -632,12 +659,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">MIDPOINT</a>
+    <a class="nav-logo" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><img src="Images/midpoint-logo-trimmed.png" alt="Midpoint Organic Transplants"></a>
     <div class="nav-links">
       <a href="#serve">Who We Serve</a>
       <a href="#pricing">Pricing</a>
       <a href="#delivery">Delivery</a>
-      <a href="#story">Our Story</a>
+      <a href="#story">About Us</a>
       <a href="#contact" class="nav-cta">Contact &rarr;</a>
     </div>
     <button class="nav-burger" id="burger" onclick="toggleMobile()" aria-label="Toggle navigation menu">
@@ -648,18 +675,30 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
     <a href="#serve" onclick="closeMobile()">Who We Serve</a>
     <a href="#pricing" onclick="closeMobile()">Pricing</a>
     <a href="#delivery" onclick="closeMobile()">Delivery</a>
-    <a href="#story" onclick="closeMobile()">Our Story</a>
+    <a href="#story" onclick="closeMobile()">About Us</a>
     <a href="#contact" onclick="closeMobile()" style="color:var(--orange);font-weight:700;">Contact &rarr;</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-img"></div>
+  <div class="hero-img">
+    <div class="hero-slide active" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8528.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8577.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8645.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8668.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8767.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8824.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_8843.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_9028.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_9179.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_9286.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('Images/Hero Slideshow/jpeg/IMG_9318.jpeg')"></div>
+  </div>
   <div class="hero-content">
-    <div class="hero-region">Santa Barbara &middot; Ventura &middot; San Luis Obispo</div>
-    <h1>For the<br>farmers<br>that grow<br>for you</h1>
-    <p class="hero-sub">Certified organic vegetable transplants grown for small farms, delivered at cost across California's tri-county region.</p>
+    <div class="hero-region">Los Angeles &middot; Santa Barbara &middot; Ventura &middot; San Luis Obispo</div>
+    <h1 style="font-size:clamp(32px, 5.5vw, 70px);">Between<br>seed &amp; soil</h1>
+    <p class="hero-sub">Certified organic vegetable and flower transplants grown for small growers, delivered at cost.</p>
     <div class="hero-btns">
       <a href="#pricing" class="btn-primary">See Pricing &rarr;</a>
       <a href="#delivery" class="btn-secondary">Delivery Calculator</a>
@@ -671,33 +710,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <section class="serve" id="serve">
   <div class="container">
     <div class="serve-header fade-in">
-      <div class="section-label">What We Do</div>
       <h2 class="section-heading">We Serve</h2>
     </div>
     <div class="serve-grid">
       <div class="serve-card fade-in">
-        <img src="https://images.pexels.com/photos/4540703/pexels-photo-4540703.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Organic farmer planting seedlings" loading="lazy">
+        <img src="Images/Organic Farmers.jpeg" alt="Organic farmer planting seedlings" loading="lazy">
         <div class="serve-card-overlay">
           <h3>Organic Farmers</h3>
           <p>Small-batch transplants with rolling orders and no minimums that force you into varieties you don't need.</p>
         </div>
       </div>
       <div class="serve-card fade-in d1">
-        <img src="https://images.pexels.com/photos/7728135/pexels-photo-7728135.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seedling trays in a nursery" loading="lazy">
+        <img src="Images/Native Plants.jpeg" alt="Seedling trays in a nursery" loading="lazy">
         <div class="serve-card-overlay">
           <h3>Native Plant Nurseries</h3>
-          <p>We extend your capacity by germinating organic plants you sell directly, freeing up your limited growing space.</p>
+          <p>Extending your growing space by starting organic plants you can bring to your nursery or sell directly from ours.</p>
         </div>
       </div>
       <div class="serve-card fade-in d2">
-        <img src="https://images.pexels.com/photos/13758316/pexels-photo-13758316.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vegetable garden store display" loading="lazy">
+        <img src="Images/Home Garden Large.jpeg" alt="Vegetable garden store display" loading="lazy">
         <div class="serve-card-overlay">
           <h3>Home Garden Stores</h3>
           <p>Retail-ready organic vegetable transplants in 4" pots and multi-packs, with minimums that actually work for you.</p>
         </div>
       </div>
       <div class="serve-card fade-in d3">
-        <img src="https://images.pexels.com/photos/3912519/pexels-photo-3912519.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Plant research and agricultural science" loading="lazy">
+        <img src="Images/Research.jpeg" alt="Plant research and agricultural science" loading="lazy">
         <div class="serve-card-overlay">
           <h3>Research &amp; AgTech</h3>
           <p>Custom propagation for research trials and agricultural technology companies needing consistent organic starts.</p>
@@ -711,25 +749,27 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="pricing-header fade-in">
-      <div class="section-label">Transparent Pricing</div>
       <h2 class="section-heading">Our Prices</h2>
       <p class="pricing-sub"><em>Same price for every crop.</em></p>
     </div>
     <div class="pricing-grid">
       <div class="pricing-card featured fade-in d1">
-        <div class="tag">For Farms</div>
-        <h3>72-Cell Trays</h3>
-        <div class="price-row"><span class="label">Machine-seeded</span><span class="amount">$13</span></div>
-        <div class="price-row"><span class="label">Hand-seeded</span><span class="amount">$16</span></div>
+        <div class="tag">For Growers</div>
+        <h3>200-Cell Trays</h3>
+        <div class="price-row"><span class="label">Machine-seeded</span><span class="amount">$13.50</span></div>
+        <div class="price-row"><span class="label">Hand-seeded</span><span class="amount">$17</span></div>
         <p class="note">Rolling orders welcome. No seasonal contracts required. Order as few trays as you need, when you need them.</p>
       </div>
       <div class="pricing-card fade-in d2">
         <div class="tag">For Retail Nurseries</div>
-        <h3>Retail Formats</h3>
-        <div class="price-row"><span class="label">4" Pots</span><span class="amount muted">Contact us</span></div>
-        <div class="price-row"><span class="label">4-6 Packs</span><span class="amount muted">Contact us</span></div>
-        <div class="price-row"><span class="label">6-12 Packs</span><span class="amount muted">Contact us</span></div>
-        <p class="note">Retail-ready organic transplants. We'll work with you on volumes and formats that fit your store.</p>
+        <h3>Trays to Fit Your Store</h3>
+        <div class="format-pills">
+          <span>4" Pots</span>
+          <span>4-6 Packs</span>
+          <span>6-12 Packs</span>
+        </div>
+        <p class="note">Retail-ready organic transplants. Pricing depends on volume and tray size.</p>
+        <a href="#contact" class="card-cta">Get a Custom Quote &rarr;</a>
       </div>
     </div>
   </div>
@@ -739,7 +779,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <section class="delivery" id="delivery">
   <div class="container">
     <div class="delivery-inner fade-in">
-      <div class="section-label">Delivery Calculator</div>
       <h2 class="section-heading">Calculate Your<br>Delivery Cost</h2>
       <p class="delivery-sub">We deliver at cost within 100 miles, six days a week.</p>
       <p class="delivery-address"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Delivering from 400 Gotham Road, Ojai, CA 93023</p>
@@ -780,13 +819,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
     </div>
     <div class="few-trays fade-in d2">
       <h3>Only need a few trays delivered?</h3>
-      <p>If we can bundle your order with a nearby delivery within 10 miles, the delivery is on us. Tell us what you need and when — we'll see if we can make it work.</p>
+      <p>If we can bundle your order with a regular delivery within 10 miles, we can deliver to you for a fraction of the price. Tell us what you need and when — we'll see if we can make it work.</p>
       <a href="#contact" class="btn-primary">Tell Us What You Need &rarr;</a>
     </div>
   </div>
 </section>
 
-<!-- TRUSTED BY -->
+<!-- SAVED FOR LATER — TRUSTED BY SECTION (remove the comment tags around this block to bring it back)
 <section class="trusted">
   <div class="container fade-in">
     <p class="trusted-label">Trusted by local farms across the tri-county</p>
@@ -800,13 +839,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
     </div>
   </div>
 </section>
+END SAVED SECTION -->
 
 <!-- IMPACT — full-bleed image section -->
 <section class="full-image impact">
-  <div class="full-image-bg" style="background-image:url('https://images.pexels.com/photos/7658812/pexels-photo-7658812.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+  <div class="full-image-bg" style="background-image:url('Images/Mesa.png')"></div>
   <div class="full-image-content">
     <div class="fade-in">
-      <div class="section-label">Community Impact</div>
       <h2 class="section-heading">We chose a site<br>where we could<br>cultivate more<br>than plants</h2>
     </div>
     <div class="impact-grid">
@@ -818,7 +857,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
       <div class="fade-in d2">
         <div class="tag">What We Provide</div>
         <h3>Paid Work &amp; Training</h3>
-        <p>Midpoint offers Mesa residents paid work, job training, and free transplants for their own vegetable gardens. A path toward real skills and independence.</p>
+        <p>Midpoint offers Mesa residents paid work, job training, and free transplants for their own vegetable gardens.</p>
       </div>
     </div>
   </div>
@@ -828,26 +867,37 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 <section class="founders" id="story">
   <div class="container">
     <div class="founders-header fade-in">
-      <div class="section-label">Our Story</div>
       <h2 class="section-heading">Meet Your<br>Growers</h2>
     </div>
-    <p class="founders-intro fade-in">In 2025, the last local nursery serving our market farms permanently lost its organic certification. That left farmers with large commercial operations that don't serve small accounts, DIY propagation that pulls labor off the fields, or giving up organic certification entirely. We started Midpoint because those aren't real choices.</p>
+    <p class="founders-intro fade-in">In 2025, the last local nursery serving our small growers permanently lost its organic certification. That left growers with large commercial operations that don't serve small accounts, DIY propagation that pulls labor off the fields, or giving up organic certification entirely. We started Midpoint because growers deserve a better option.</p>
     <div class="founders-grid">
       <div class="founder-card fade-in d1">
-        <div class="founder-avatar" style="background:var(--green)"><span>SM</span></div>
-        <h3>Shannon Myers</h3>
-        <p class="role">Co-Founder</p>
-        <p class="founder-detail">Nearly 20 years nursery growing and management experience</p>
-        <p class="founder-detail">MSc Agronomy, BSc Horticulture & Crop Sciences</p>
-        <p class="founder-detail">Expertise in plant biology, complex order fulfillment, and large-scale account management</p>
+        <div class="founder-header">
+          <h3>Shannon Myers</h3>
+          <p class="role">Co-Founder</p>
+        </div>
+        <div class="founder-body">
+          <div class="founder-avatar"><img src="Images/Founders/shannon-myers.jpg" alt="Shannon Myers" loading="lazy"></div>
+          <div class="founder-details">
+            <p class="founder-detail">Nearly 20 years nursery growing and management experience for growers ranging from household names to market gardens</p>
+            <p class="founder-detail">MSc Agronomy, BSc Horticulture &amp; Crop Sciences</p>
+            <p class="founder-detail">Expertise in plant biology and pathology across a wide range of plant families</p>
+          </div>
+        </div>
       </div>
       <div class="founder-card fade-in d2">
-        <div class="founder-avatar" style="background:var(--soil)"><span>CF</span></div>
-        <h3>Christopher Fiorello</h3>
-        <p class="role">Co-Founder</p>
-        <p class="founder-detail">3.5 years managing a small regenerative organic farm</p>
-        <p class="founder-detail">Deep knowledge of small-scale organic transplant production and small farm customer needs</p>
-        <p class="founder-detail">11 years professional marketing experience for nonprofits and Fortune 500 companies</p>
+        <div class="founder-header">
+          <h3>Christopher Fiorello</h3>
+          <p class="role">Co-Founder</p>
+        </div>
+        <div class="founder-body">
+          <div class="founder-avatar"><img class="avatar-christopher" src="Images/Founders/christopher-fiorello.jpg" alt="Christopher Fiorello" loading="lazy"></div>
+          <div class="founder-details">
+            <p class="founder-detail">3.5 years managing a small regenerative organic farm</p>
+            <p class="founder-detail">11 years professional marketing experience for nonprofits and Fortune 500 companies</p>
+            <p class="founder-detail">Hands-on knowledge of small-farm transplant needs, growing schedules, and budget cycles</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -859,10 +909,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
     <div class="contact-grid">
       <div class="fade-in">
         <div class="contact-header">
-          <div class="section-label">Get in Touch</div>
           <h2 class="section-heading">Ready<br>to Grow?</h2>
         </div>
-        <p class="contact-sub">Tell us what you need and we'll get back to you within 24 hours. Whether it's a quick question or a full order, we're here.</p>
+        <p class="contact-sub">Tell us what you need and we'll get back to you within one business day.</p>
         <div class="contact-info" style="margin-top:40px;">
           <div class="contact-info-item">
             <h4>Call</h4>
@@ -872,10 +921,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
             <h4>Email</h4>
             <a href="mailto:christopher@midpointorganics.com">christopher@midpointorganics.com</a>
           </div>
-          <div class="contact-info-item">
+          <!-- <div class="contact-info-item">
             <h4>Location</h4>
             <p>400 Gotham Road, Ojai, CA 93023</p>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="fade-in d1">
@@ -900,26 +949,28 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
         </form>
         <div class="contact-success" id="contactSuccess">
           <h4>Message Sent!</h4>
-          <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+          <p>Thanks for reaching out.<br>We'll get back to you within one business day.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER CTA — inset editorial image -->
+<!-- SAVED FOR LATER — FOOTER CTA / "READY TO GROW" BOX (remove the comment tags around this block to bring it back)
 <section class="footer-cta">
   <div class="footer-cta-bg"></div>
   <div class="footer-cta-content fade-in">
     <h3>Ready to Grow?</h3>
-    <p>Tell us what you need and we'll get back to you within 24 hours.</p>
+    <p>Tell us what you need and we'll get back to you within one business day.</p>
     <a href="#contact" class="btn-primary">Get in Touch &rarr;</a>
   </div>
 </section>
+END SAVED SECTION -->
 
 <!-- FOOTER — Natoora editorial style -->
 <footer class="footer">
   <div class="container">
+    <!-- SAVED FOR LATER — FOOTER TOP (remove the comment tags around this block to bring it back)
     <div class="footer-grid">
       <div class="footer-left">
         <h3 class="footer-headline">Growing for the<br>farmers that grow<br>for you.</h3>
@@ -941,7 +992,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
           <a href="#serve">Who We Serve</a>
           <a href="#pricing">Pricing</a>
           <a href="#delivery">Delivery</a>
-          <a href="#story">Our Story</a>
+          <a href="#story">About Us</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">Location</p>
@@ -950,6 +1001,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
         </div>
       </div>
     </div>
+    END SAVED SECTION -->
     <div class="footer-bottom">
       <p>&copy; 2026 Midpoint Organic Transplants, LLC</p>
       <p>Ojai, California</p>
@@ -964,6 +1016,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
 </div>
 
 <script>
+// HERO — repeating slideshow
+(function () {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length < 2) return;
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
+})();
+
 // NAV — mobile menu with body scroll lock
 let mobileOpen = false;
 function toggleMobile() {
@@ -1037,17 +1101,17 @@ function calcDelivery() {
     return;
   }
 
-  const fuel = miles * 2 * (5 / 15);
+  const fuel = miles * 2 * (5.75 / 15);
   const maint = miles * 2 * 0.25;
   const truck = miles * 2 * 0.20;
   const logistics = 15;
   const unloadCost = unloadMode === 'we' ? trays * 0.05 : 0;
-  const driverHrs = (miles * 2) / 35;
+  const driverHrs = (miles * 2) / 45;
   const driver = driverHrs * 25;
   const total = fuel + maint + truck + logistics + unloadCost + driver;
 
   let html = '';
-  html += costLine('Fuel ($5/gal @ 15 mpg)', fuel);
+  html += costLine('Fuel ($5.75/gal @ 15 mpg)', fuel);
   html += costLine('Maintenance & repairs ($0.25/mi)', maint);
   html += costLine('Truck payment ($0.20/mi)', truck);
   html += costLine('Logistics fee', logistics);
@@ -1084,7 +1148,7 @@ function submitContact(e) {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  fetch('https://formspree.io/f/xrgnqozv', {
+  fetch('https://formspree.io/f/xaqravle', {
     method: 'POST',
     body: new FormData(form),
     headers: { 'Accept': 'application/json' }
